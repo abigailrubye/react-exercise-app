@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import RepetitionExercise from "./components/RepetitionExercise";
+import DurationExercise from "./components/DurationExercise";
 
 function App() {
+  const [selectedExercise, setSelectedExercise] = useState(null);
+
+  const exercises = [
+    { name: "Push Ups", type: "repetition" },
+    { name: "Plank", type: "duration" },
+    { name: "Jumping Jacks", type: "repetition" }
+  ];
+
+  let screen = <p>Select an exercise</p>;
+
+  if (selectedExercise) {
+    if (selectedExercise.type === "repetition") {
+      screen = <RepetitionExercise name={selectedExercise.name} />;
+    } else {
+      screen = <DurationExercise name={selectedExercise.name} />;
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ textAlign: "center" }}>
+      <h1>Exercise Tracker</h1>
+
+      {!selectedExercise && (
+        <div>
+          {exercises.map((exercise, index) => (
+            <button
+              key={index}
+              onClick={() => setSelectedExercise(exercise)}
+              style={{ margin: "5px" }}
+            >
+              {exercise.name}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {screen}
     </div>
   );
 }
