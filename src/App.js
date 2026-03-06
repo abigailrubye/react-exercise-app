@@ -1,4 +1,4 @@
-import { useState } from "react"; //update
+import { useState } from "react";
 import RepetitionExercise from "./components/RepetitionExercise";
 import DurationExercise from "./components/DurationExercise";
 
